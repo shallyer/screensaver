@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<form onsubmit="return yanzheng">
+		<p><label>用户名：</label><input type="text" id="username"></p>
+		<p><label>密码：</label><input type="password" id="mima"></p>
+		<p><label>确认密码：</label><input type="repassword" id="queren"></p>
+		<p><label></label><input type="submit" id="chengjiao" >
+		<input type="button" value="btn登录" onclick="yanzheng()"></p>
+		</form>
+		<script>
+			function yanzheng(){
+				var user=getId("username").value;
+				var password=getId("mima").value;
+				var repassword=getId("queren").value;
+				if(user==""){
+					alert("用户名不能为空");
+					return false;
+				}
+				return true;
+			}
+			function getId(id){
+				return document.getElementById(id);
+			}
+		</script>
+	</body>
+</html>

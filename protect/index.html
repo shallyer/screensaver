@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			/*div{
+				width: 222px;
+				height: 222px;
+				position: absolute;
+			}
+			img{
+				position: absolute;
+			}*/
+			#img1{
+				border: 1px solid;
+				/*height: ;*/
+				width: 100%;
+			}
+			body{
+				height: 100%;
+				overflow: hidden;
+				background: url(../img/1.jpg) no-repeat ;
+			}
+			.imgdiv{
+				width: 120px;
+				height: 120px;
+				position: absolute;
+			}
+			.imgdiv img{
+				width: 100%;
+				position: absolute;
+			}
+		</style>
+	</head>
+	<body>
+		<script>
+
+			function createImg(){
+				var div = document.createElement("div");
+				div.className="imgdiv";
+				div.style.top="5px";
+				div.style.left="8px";
+				div.setAttribute("data-rotx",parseInt(Math.random()*15)+5);
+				div.setAttribute("data-roty",parseInt(Math.random()*15)+5);
+				for(var i=0;i<4;i++){
+					var img =document.createElement("img");
+					img.src="../img/ch"+ i +".png";
+					div.appendChild(img);
+				}
+				document.body.appendChild(div);
+			}
+			var imgNum=0
+			var id=setInterval(function(){
+				createImg();
+				imgNum++;
+				if(imgNum==10){
+					clearInterval(id);
+				}
+			},2000);
+			setInterval(function(){
+				moveImg();
+			},50);
+			function moveImg(){
+				var divs=document.getElementsByTagName("div");
+				var Height=document.documentElement.clientHeight;
+				var Width=document.documentElement.clientWidth;
+				for(var k=0;k<divs.length;k++){
+				var rotx=parseInt(divs[k].getAttribute("data-rotx"));
+				var roty=parseInt(divs[k].getAttribute("data-roty"));
+				var top=parseInt(divs[k].style.top);
+				var left=parseInt(divs[k].style.left);
+				
+				top+=roty;
+				left+=rotx;
+				divs[k].style.top=top+"px";
+				divs[k].style.left=left+"px";
+				if(top>Height-222){
+					roty=-roty;
+					setImgOpacity(divs[k]);
+					divs[k].style.top=(Height-222)+"px";
+				}
+				if(top<=0){
+					roty=-roty;
+					setImgOpacity(divs[k]);
+					divs[k].style.top="0px"
+				}
+				if(left>Width-222){
+					rotx=-rotx;
+					setImgOpacity(divs[k]);
+					divs[k].style.left=(Width-222)+"px";
+				}
+				if(left<=0){
+					rotx=-rotx;
+					setImgOpacity(divs[k]);
+					divs[k].style.left="0px"
+				}
+				divs[k].setAttribute("data-rotx",rotx);
+				divs[k].setAttribute("data-roty",roty);
+							}
+			}
+			function setImgOpacity(div){
+				var imgs=div.getElementsByTagName("img");
+				for(var i=0;i<imgs.length-1;i++){
+					imgs[i].style.opacity=Math.random();
+				}
+			}
+		</script>
+	</body>
+</html>
